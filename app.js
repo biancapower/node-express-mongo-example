@@ -17,6 +17,12 @@ const logger = ((req, res, next) => {
 app.use(logger);
 */
 
+/* BODY PARSER MIDDLEWARE */
+// handle parsing json content
+app.use(bodyParser.json());
+// handle parsing urlencoded content [extended explained here: https://www.npmjs.com/package/body-parser#extended]
+app.use(bodyParser.urlencoded({extended: false}));
+
 app.get('/', (req, res) => {
     res.send('hello world');
 });
