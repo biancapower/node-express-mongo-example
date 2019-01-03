@@ -29,8 +29,23 @@ app.use(bodyParser.urlencoded({extended: false}));
         // using this with path.join is safer than the option that doesn't
 app.use(express.static(path.join(__dirname, 'public')));
 
+let people = [
+    {
+        name: "Bob",
+        age: 50
+    },
+    {
+        name: "Jane",
+        age: 45
+    },
+    {
+        name: "T",
+        age: 30
+    }
+]
+
 app.get('/', (req, res) => {
-    res.send('hello world');
+    res.json(people);
 });
 
 // process.env.PORT lets the port be set by Heroku
