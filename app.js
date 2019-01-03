@@ -23,6 +23,12 @@ app.use(bodyParser.json());
 // handle parsing urlencoded content [extended explained here: https://www.npmjs.com/package/body-parser#extended]
 app.use(bodyParser.urlencoded({extended: false}));
 
+/* STATIC FOLDER MIDDLEWARE */
+// set static path
+    // `__dirname` is the directory in which the currently executing script resides
+        // using this with path.join is safer than the option that doesn't
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.get('/', (req, res) => {
     res.send('hello world');
 });
