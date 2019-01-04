@@ -6,6 +6,11 @@ const path = require('path');
 
 const app = express();
 
+// set view engine
+app.set('view engine', 'ejs');
+// specify views folder
+app.set('views', path.join(__dirname, 'views'));
+
 /* BODY PARSER MIDDLEWARE */
 // handle parsing json content
 app.use(bodyParser.json());
