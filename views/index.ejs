@@ -2,6 +2,17 @@
 
     <h1><%= message %></h1>
 
+    <%# form submits to `/users/add` %> 
+    <form method="POST" action="/users/add">
+        <label>First name</label>
+        <input type="text" name="first_name">
+        <br>
+        <label>Age</label>
+        <input type="text" name="age">
+        <br>
+        <input type="submit" value="submit">
+    </form>
+
     <ul>
     <% users.forEach((user) => { %>
         <li><%= user.name %></li>

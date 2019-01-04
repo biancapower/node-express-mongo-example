@@ -45,6 +45,11 @@ app.get('/', (req, res) => {
     });
 });
 
+// handle form submission
+app.post('/users/add', (req, res) => {
+    console.log(req.body.first_name)
+});
+
 // process.env.PORT lets the port be set by Heroku
 const port = process.env.PORT || 3033;
 app.listen(port, () => {
