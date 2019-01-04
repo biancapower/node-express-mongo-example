@@ -24,7 +24,9 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
-    res.render('index');
+    res.render('index', {
+        message: "Helloooooo"
+    });
 });
 
 // process.env.PORT lets the port be set by Heroku
