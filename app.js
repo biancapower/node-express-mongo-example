@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 // simplifies file paths
     // core module, so doesn't need to be npm installed
 const path = require('path');
+const expressValidator = require('express-validator');
 
 const app = express();
 
@@ -10,6 +11,9 @@ const app = express();
 app.set('view engine', 'ejs');
 // specify views folder
 app.set('views', path.join(__dirname, 'views'));
+
+// express validator middleware
+app.use(expressValidator());
 
 /* BODY PARSER MIDDLEWARE */
 // handle parsing json content
