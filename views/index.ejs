@@ -2,4 +2,10 @@
 
     <h1><%= message %></h1>
 
+    <ul>
+    <% users.forEach((user) => { %>
+        <li><%= user.name %></li>
+    <% }); %>
+    </ul>
+
 <% include partials/footer %>

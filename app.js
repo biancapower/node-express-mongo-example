@@ -23,9 +23,25 @@ app.use(bodyParser.urlencoded({extended: false}));
         // using this with path.join is safer than the option that doesn't
 app.use(express.static(path.join(__dirname, 'public')));
 
+const users = [
+    {
+        name: "Bob",
+        age: 50
+    },
+    {
+        name: "Jane",
+        age: 45
+    },
+    {
+        name: "T",
+        age: 30
+    }
+]
+
 app.get('/', (req, res) => {
     res.render('index', {
-        message: "Helloooooo"
+        message: "Helloooooo",
+        users: users
     });
 });
 
