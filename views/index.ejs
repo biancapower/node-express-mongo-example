@@ -2,6 +2,14 @@
 
     <h1><%= message %></h1>
 
+    <% if (errors) { %>
+        <ul>
+        <% errors.forEach((error) => { %>
+            <li><%= error.msg %></li>
+        <% }); %>
+        </ul>
+    <% } %>
+
     <%# form submits to `/users/add` %> 
     <form method="POST" action="/users/add">
         <label>First name</label>

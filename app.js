@@ -27,6 +27,12 @@ app.use(bodyParser.urlencoded({extended: false}));
         // using this with path.join is safer than the option that doesn't
 app.use(express.static(path.join(__dirname, 'public')));
 
+// global vars
+app.use((req, res, next) => {
+    res.locals.errors = null;
+    next();
+});
+
 const users = [
     {
         name: "Bob",
@@ -51,11 +57,26 @@ app.get('/', (req, res) => {
 
 // handle form submission
 app.post('/users/add', (req, res) => {
-    const newUser = {
-        first_name: req.body.first_name,
-        age: req.body.age
+
+    req.checkBody('first_name', 'First name is required').notEmpty();
+    req.checkBody('age', 'Age must be an integer').isInt();
+
+    const errors = req.validationErrors();
+
+    if(errors) {
+        res.render('index', {
+            message: "Helloooooo",
+            users: users,
+            errors: errors // errors needs to be set as global var (done above)
+        });
+        console.log('ERRORS');
+    } else {
+        const newUser = {
+            first_name: req.body.first_name,
+            age: req.body.age
+        }
+        console.log('SUCCESS');
     }
-    console.log(newUser)
 });
 
 // process.env.PORT lets the port be set by Heroku
