@@ -22,6 +22,9 @@ db.on('error', (err) => {
 
 const app = express();
 
+// bring in models
+const User = require('./models/user');
+
 // set view engine
 app.set('view engine', 'ejs');
 // specify views folder
@@ -48,26 +51,18 @@ app.use((req, res, next) => {
     next();
 });
 
-const users = [
-    {
-        name: "Bob",
-        age: 50
-    },
-    {
-        name: "Jane",
-        age: 45
-    },
-    {
-        name: "T",
-        age: 30
-    }
-]
-
 app.get('/', (req, res) => {
-    res.render('index', {
-        message: "Helloooooo",
-        users: users
-    });
+    User.find({}, (err, users) => {     // 'users' is the response
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(users);
+            res.render('index', {
+                message: "Helloooooo",
+                users: users
+            });
+        }
+    })
 });
 
 // handle form submission
