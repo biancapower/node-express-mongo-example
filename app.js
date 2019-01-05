@@ -10,6 +10,16 @@ mongoose.connect('mongodb://localhost/example-customerapp');
 
 const db = mongoose.connection;
 
+// check db connection
+db.once('open', () => {
+    console.log('Connected to MongoDB');
+});
+
+// check for db errors
+db.on('error', (err) => {
+    console.log(err);
+});
+
 const app = express();
 
 // set view engine
