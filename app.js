@@ -56,7 +56,6 @@ app.get('/', (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            console.log(users);
             res.render('index', {
                 message: "Helloooooo",
                 users: users
@@ -74,17 +73,32 @@ app.post('/users/add', (req, res) => {
     const errors = req.validationErrors();
 
     if(errors) {
-        res.render('index', {
-            message: "Helloooooo",
-            users: users,
-            errors: errors // errors needs to be set as global var (done above)
+        User.find({}, (err, users) => {     // 'users' is the response
+            if (err) {
+                console.log(err);
+            } else {
+                res.render('index', {
+                    message: "Helloooooo",
+                    users: users,
+                    errors: errors // errors needs to be set as global var (done above)
+                });
+            }
         });
         console.log('ERRORS');
     } else {
-        const newUser = {
-            first_name: req.body.first_name,
-            age: req.body.age
-        }
+        const user = new User();
+
+        user.name = req.body.first_name,
+        user.age = req.body.age
+        
+        user.save((err) => {
+            if(err){
+                console.log(err);
+            } else {
+                res.redirect('/');
+            }
+        });
+
         console.log('SUCCESS');
     }
 });
