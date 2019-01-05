@@ -4,6 +4,11 @@ const bodyParser = require('body-parser');
     // core module, so doesn't need to be npm installed
 const path = require('path');
 const expressValidator = require('express-validator');
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost/example-customerapp');
+
+const db = mongoose.connection;
 
 const app = express();
 
